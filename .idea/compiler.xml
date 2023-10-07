@@ -9,5 +9,8 @@
         <module name="SauceDemo" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="xyzBank" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>

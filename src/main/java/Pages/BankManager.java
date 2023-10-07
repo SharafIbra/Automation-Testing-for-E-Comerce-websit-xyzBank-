@@ -4,9 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class BankManager {
-    WebDriver driver;
-
+public class BankManager extends basePage{
 
 
     public BankManager(WebDriver driver) {
@@ -39,22 +37,26 @@ public class BankManager {
     private By process = new By.ByXPath("/html/body/div/div/div[2]/div/div[2]/div/div/form/button");
 
 
-    public String addCustomer(String FirstName , String LastName , String PostCode){
+    public void addCustomer(String FirstName , String LastName , String PostCode){
         driver.findElement(addcustomer).click();
         setFirstname(FirstName);
         setLastname(LastName);
         setPostcode(PostCode);
         driver.findElement(addcustomer_submit).click();
-        return getTextAlert().replaceAll("[^0-9]", "");
+
+     }
+
+     public String getCustomer_ID(){
+         return getTextAlert().replaceAll("[^0-9]", "");
      }
     private void setFirstname(String firstName){
-        driver.findElement(firstname).sendKeys(firstName);
+        sendKeys(firstname,firstName);
     }
     private void setLastname(String lastName){
-        driver.findElement(lastname).sendKeys(lastName);
+        sendKeys(lastname,lastName);
     }
     private void setPostcode(String postCode){
-        driver.findElement(postcode).sendKeys(postCode);
+        sendKeys(postcode,postCode);
     }
 
 
@@ -62,19 +64,19 @@ public class BankManager {
 
     public void openAccount(String customerId ,String currency)
     {
-        driver.findElement(openaccount).click();
+        click(openaccount);
         Select selectCustomer = new Select(driver.findElement(customerNameDropDown));
         selectCustomer.selectByValue(customerId);
         Select selectCurrency = new Select(driver.findElement(currencyDropDown));
         selectCurrency.selectByVisibleText(currency);
-        driver.findElement(process).click();
+        click(process);
     }
     public void showCustomers(){driver.findElement(customers).click();}
 
     public boolean searchCustomer(String customerName){
-        driver.findElement(customers).click();
-        driver.findElement(searchCustomer).sendKeys(customerName);
-        String searchText = driver.findElement(searchCustomerName).getText();
+        click(customers);
+        sendKeys(searchCustomer,customerName);
+        String searchText = getText(searchCustomerName);
         System.out.println(searchText);
         return searchText.contains(customerName);
 

@@ -15,17 +15,16 @@ public class BaseTests {
     WebDriver driver;
     protected HomePage homePage;
 
-    @BeforeClass
+    @BeforeMethod
         public void setUpEdgeDriver() {
         driver = new ChromeDriver();
-
+        goHome();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
 
 
 
-    @BeforeMethod
     public void goHome(){
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
         driver.manage().window().maximize();
@@ -33,7 +32,7 @@ public class BaseTests {
     }
 
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {driver.quit();}
 
 

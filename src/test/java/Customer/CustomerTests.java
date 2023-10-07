@@ -13,6 +13,7 @@ public class CustomerTests extends BaseTests {
     void testCustomerLogin() {
         var cust = homePage.clickCustomerLogin();
         cust.customerlogin("Hermoine Granger");
+
     }
 
     @Test
@@ -23,25 +24,16 @@ public class CustomerTests extends BaseTests {
         assertTrue(cust.depositStatus(), "Deposit not ok");
     }
 
-    /*@Test
-    void testDepositMoney_invalid() {
-        var cust = homePage.clickCustomerLogin();
-        cust.customerlogin("Harry Potter");
-        *//*        error-> invalid account number      *//*
-        cust.depositMoney("10000", "10015");
-        assertTrue(cust.depositStatus(), "Deposit not ok");
-    }*/
 
-
-    @Test
+    @Test(description = "Customer need to withdraw amount equal or less than the balance")
     void testWithdrawMoney() {
         var cust = homePage.clickCustomerLogin();
-        cust.customerlogin("Harry Potter");
-        cust.withdrawMoney("100", "1005");
+        cust.customerlogin("Hermoine Granger");
+        cust.withdrawMoney("1000", "1001");
         assertTrue(cust.withdrawStatus(), "Transaction Failed. You can not withdraw amount more than the balance.");
     }
 
-    @Test
+    @Test(description = "Customer need to withdraw amount more than the balance")
     void testWithdrawMoney_invalid() {
         var cust = homePage.clickCustomerLogin();
         cust.customerlogin("Ron Weasly");
@@ -52,15 +44,15 @@ public class CustomerTests extends BaseTests {
 
 
 
-    @Test
+    @Test(description = "Customer need to deposit amount of money")
     void test_deposit_withdraw(){
         var cust = homePage.clickCustomerLogin();
-        cust.customerlogin("Sharaf Ibrahim");
+        cust.customerlogin("Neville Longbottom");
 
-        cust.depositMoney("10000", "1016");
-        cust.withdrawMoney("100", "1016");
-
+        cust.depositMoney("10000", "1013");
     }
+
+
 
 
 }

@@ -2,14 +2,12 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.support.ui.Select;
 
-
-public class Customer {
-    WebDriver driver;
+import static org.testng.Assert.assertEquals;
 
 
+public class Customer extends basePage{
 
     public Customer(WebDriver driver) {
     this.driver=driver;
@@ -21,6 +19,7 @@ public class Customer {
     private By loginbutton = new By.ByXPath("/html/body/div/div/div[2]/div/form/button");
 
     private By selectacountDropDown = new By.ById("accountSelect");
+    private By welcomemsg = new By.ByXPath("/html/body/div/div/div[2]/div/div[1]/strong/text()[1]");
   /**
    * deposit elements
    * */
@@ -43,13 +42,24 @@ public class Customer {
     private By endtime = new By.ById("end");
 
     public void customerlogin(String customerName){
+
+
         driver.findElement(customerlogin).click();
 
         Select selectCustomer = new Select(driver.findElement(selectcustomerDropDown));
         selectCustomer.selectByVisibleText(customerName);
 
         driver.findElement(loginbutton).click();
+        System.out.println();
+
     }
+
+    /*public void testCustomerLoginSuccessfully(){
+        String expectedURL = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/account";
+        String actualURL = getCurrentURL();
+        assertEquals(actualURL,expectedURL,"user not logged");
+    }*/
+
 
 
     private void selectAccount(String accountNumber){
@@ -59,18 +69,17 @@ public class Customer {
 
     public void depositMoney(String amount,String accountNumber){
         selectAccount(accountNumber);
-        driver.findElement(deposit).click();
+        click(deposit);
 
-        driver.findElement(amounttodeposittextfield).sendKeys(amount);
-        driver.findElement(depositbutton).click();
+        sendKeys(amounttodeposittextfield,amount);
+        click(depositbutton);
     }
 
     public void withdrawMoney(String amount,String accountNumber){
         selectAccount(accountNumber);
-        driver.findElement(withdraw).click();
-
-        driver.findElement(amounttowithdrawtextfield).sendKeys(amount);
-        driver.findElement(withdrawbutton).click();
+        click(withdraw);
+        sendKeys(amounttowithdrawtextfield,amount);
+        click(withdrawbutton);
     }
 
     public void showTransactions(){

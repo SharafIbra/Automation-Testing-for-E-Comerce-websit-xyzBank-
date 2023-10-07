@@ -7,7 +7,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class BankManagerTests extends BaseTests {
-    @Test
+    @Test (description = "Manager add a new customer")
     void testAddCustomer(){
         var bm = homePage.clickBankManagerLogin();
         String firstname = "Sharaf";
@@ -22,28 +22,24 @@ public class BankManagerTests extends BaseTests {
     }
 
 
-    @Test
+    @Test (description = "Manager search for a specific customer")
     void testSearchCustomer(){
         var bm = homePage.clickBankManagerLogin();
 
-        String first_name = "Sharaf1";
-        String last_name = "Ibrahim1";
-        String post_code = "12312345" ;
-        bm.addCustomer(first_name,last_name,post_code);
-        bm.acceptAlert();
-        assertTrue(bm.searchCustomer(first_name),"Customer not found");
+        assertTrue(bm.searchCustomer("Harry"),"Customer not found");
 
     }
 
 
-    @Test
+    @Test (description = "Manager opens a new account to a registered customer")
     void testOpenAccount(){
         var bm = homePage.clickBankManagerLogin();
 
         String first_name = "Sharaf2";
         String last_name = "Ibrahim2";
         String post_code = "123123456" ;
-        String customerID = bm.addCustomer(first_name,last_name,post_code);
+        bm.addCustomer(first_name,last_name,post_code);
+        String customerID = bm.getCustomer_ID();
         bm.acceptAlert();
         String currency = "Dollar";
         bm.openAccount(customerID,currency);
@@ -51,6 +47,13 @@ public class BankManagerTests extends BaseTests {
         String expectedAlert = "Account created successfully";
         assertTrue(actualAlert.contains(expectedAlert),"Account isn't created");
         bm.acceptAlert();
+    }
+
+
+
+    @Test (description = "Delete Customer")
+    public void testDeleteCustomer(){
+
     }
 
 
