@@ -1,0 +1,37 @@
+<?xml-model href=""?>
+<suite name="LUMA Test Suite">
+	<test name="Create Account " preserve-order="true">
+		<classes>
+			<class name="CreateAccountPage.CreateAccountPageTests" />
+		</classes>
+	</test>
+	<test name="Login Account " preserve-order="true">
+		<classes>
+			<class name="LoginPage.LoginPageTests" />
+		</classes>
+	</test>
+	<test name="Add Items To Shopping Cart" preserve-order="true">
+		<classes>
+			<class name="AddItemsToShoppingCart.AddItemsToShoppingCartTests" />
+		</classes>
+	</test>
+	<test name="Edit Account Information" >
+		<classes>
+			<class name="EditAccountInformation.EditAccountInformationTests" />
+		</classes>
+	</test>
+	<test name="Forget Password" preserve-order="true">
+		<classes>
+			<class name="ForgetPassword.ForgetPasswordPageTests" />
+		</classes>
+	</test>
+	<test name="Search product" preserve-order="true">
+		<classes>
+			<class name="SearchProduct.SearchProductTests" />
+		</classes>
+	</test>
+
+
+
+</suite>
+
